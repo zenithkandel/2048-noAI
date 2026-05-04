@@ -73,7 +73,28 @@ body {
     height: 100%;
     width: 100%;
     position: absolute;
-    background: rgba(255, 161, 99, 0.774);
+    background: #ffa163c5;
     /* filter: blur(12px); */
     backdrop-filter: blur(5px);
+    border: 5px solid #753910;
+    cursor: pointer;
+
+}
+
+.pause-screen i {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 120px;
+}
+
+.pause-screen span {
+    position: absolute;
+    top: 65%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 50px;
+    font-weight: bolder;
+    box-sizing: border-box;
 }
