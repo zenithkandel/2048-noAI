@@ -34,6 +34,8 @@ function initializeGrid() {
         }
         game_arr.push(tmp);
     }
+    game_arr[3][3] = "2";
+    game_arr[3][2] = "2";
     console.log(JSON.stringify(game_arr))
 }
 
@@ -45,7 +47,7 @@ function renderGrid() {
         tmp += "<tr>"
         for (let j = 0; j < game_size; j++) {
             // tmp.push("0");
-            tmp += "<td>" + game_arr[i][j] + "</td>";
+            tmp += "<td>" + ((game_arr[i][j] == "0") ? "⠀" : game_arr[i][j]) + "</td>";
         }
         // game_arr.push(tmp);
         tmp += "</tr>"
@@ -57,3 +59,7 @@ function renderGrid() {
 
 initializeGrid()
 renderGrid()
+
+function generateNew() {
+
+}

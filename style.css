@@ -115,4 +115,6 @@ body {
     /* padding: 25px; */
     box-sizing: border-box;
     border: 3px solid #faecd2;
+    font-size: 35px;
+    font-weight: bolder;
 }
