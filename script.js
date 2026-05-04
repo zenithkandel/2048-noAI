@@ -61,5 +61,50 @@ initializeGrid()
 renderGrid()
 
 function generateNew() {
-
+    success = false;
+    free_pos = [];
+    for (let i = 0; i < game_size; i++) {
+        for (let j = 0; j < game_size; j++) {
+            if (game_arr[i][j] == "0") {
+                free_pos.push([i, j]);
+            }
+        }
+    }
+    pos = Math.floor(Math.random() * (free_pos.length - 1 - 0 + 1) + 0);
+    // console.log(free_pos.length);
+    if (free_pos.length > 0) {
+        game_arr[free_pos[pos][0]][free_pos[pos][1]] = 2;
+    }
+    else {
+        console.log("No empty place, game over");
+        game_state = "ended";
+    }
+    renderGrid()
 }
+
+function keyHandle() {
+    document.onkeydown = function (e) {
+        if (e.key == "ArrowRight") {
+            for (let i = 0; i < game_size; i++) {
+                for (let j = 0; j < game_size; j++) {
+                    if (game_arr[i][j] !== "0") {
+                        if (game_arr[i][j + 1] && game_arr[i][j + 1] == game_arr[i][j]) {
+                            game_arr[i][j + 1] += game_arr[i][j];
+                            game_arr[i][j] = "0";
+                        }
+                    }
+                }
+            }
+        }
+        // else if (e.key == "ArrowLeft") {
+        //     for (let i = 0; i < game_size; i++) {
+        //         for (let j = 0; j < game_size; j++) {
+        //             if (game_arr[i][j] == "0") {
+        //                 free_pos.push([i, j]);
+        //             }
+        //         }
+        //     }
+        // }
+    }
+}
+keyHandle();
