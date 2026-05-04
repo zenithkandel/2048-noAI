@@ -99,3 +99,20 @@ body {
     font-weight: bolder;
     box-sizing: border-box;
 }
+
+.canvas .grid {
+    height: 100%;
+}
+
+.canvas .grid table {
+    height: 100%;
+    width: 100%;
+}
+
+.canvas .grid table td {
+    text-align: center;
+    background: rgb(193, 144, 84);
+    /* padding: 25px; */
+    box-sizing: border-box;
+    border: 3px solid #faecd2;
+}
