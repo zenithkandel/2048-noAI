@@ -15,13 +15,15 @@ else {
 let game_size = "4";
 let game_state = "running";//"paused" if paused
 
-// console.log(grid_size_chips)
+
 grid_size_chips.forEach(thing => {
     // console.log(thing);
 
     thing.onclick = function () {
         game_size = thing.getAttribute("value");
-        console.log(game_size);
+        // console.log(game_size);
+        initializeGrid()
+        renderGrid();
     }
 });
 
@@ -56,8 +58,8 @@ function renderGrid() {
     tmp += "</table>";
     grid_element.innerHTML = tmp;
 }
-
 initializeGrid()
+
 renderGrid()
 
 function generateNew() {
@@ -90,15 +92,18 @@ function keyHandle() {
                 for (let j = 0; j < game_size; j++) {
                     if (game_arr[i][j] != "0") {
                         // status_element.innerHTML += "<br>nonempty found"
-                        if (game_arr[i][j + 1] && game_arr[i][j + 1] == game_arr[i][j]) {
-                            game_arr[i][j + 1] = JSON.parse(game_arr[i][j + 1]) + JSON.parse(game_arr[i][j]);
-                            game_arr[i][j] = "0";
-                        }
+                        // if (game_arr[i][j + 1] && game_arr[i][j + 1] == game_arr[i][j]) {
+                        //     game_arr[i][j + 1] = JSON.parse(game_arr[i][j + 1]) + JSON.parse(game_arr[i][j]);
+                        //     game_arr[i][j] = "0";
+                        //     generateNew();
+
+                        // }
+
                     }
                 }
             }
         }
-        renderGrid()
+        renderGrid();
         // else if (e.key == "ArrowLeft") {
         //     for (let i = 0; i < game_size; i++) {
         //         for (let j = 0; j < game_size; j++) {
