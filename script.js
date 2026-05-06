@@ -85,9 +85,11 @@ function generateNew() {
 }
 let status_element = document.querySelector(".status");
 function swap([a, b], [c, d]) {
-    temp = game_arr[c, d];
-    game_arr[c, d] = game_arr[a, b];
-    game_arr[a, b] = temp;
+    status_element.innerHTML = `Swapping ${JSON.stringify([a, b])} with ${JSON.stringify([c, d])}`
+    temp = game_arr[c][d];
+    game_arr[c][d] = game_arr[a][b];
+    game_arr[a][b] = temp;
+    renderGrid();
 }
 
 function keyHandle() {
@@ -99,24 +101,54 @@ function keyHandle() {
             for (let i = 0; i < game_size; i++) {
                 for (let j = 0; j < game_size; j++) {
                     if (game_arr[i][j] != "0") {
-                        // status_element.innerHTML += "<br>nonempty found"
-                        // if (game_arr[i][j + 1] && game_arr[i][j + 1] == game_arr[i][j]) {
-                        //     game_arr[i][j + 1] = JSON.parse(game_arr[i][j + 1]) + JSON.parse(game_arr[i][j]);
-                        //     game_arr[i][j] = "0";
+                        status_element.innerHTML += `<br>nonempty found at ${JSON.stringify([i, j])}`
 
-                        // }
-                        var l = j;
-                        for (let k = j; k < game_size; k++) {
-                            if (game_arr[i][k] == "0") {
-                                l = k;
-                                swap([i, l], [i, k]);
+
+                        if (j - 1 < game_size) {
+                            for (let k = j; k < game_size; k++) {
+                                if (game_arr[i][k + 1] == "0") {
+                                    swap([i, k], [i, k + 1]);
+                                }
+                                else {
+                                    break;
+                                }
                             }
                         }
-                        // generateNew();
+                        if (game_arr[i][j + 1] != "0" && game_arr[i][j + 1] == game_arr[i][j]) {
+                            game_arr[i][j + 1] = JSON.parse(game_arr[i][j + 1]) + JSON.parse(game_arr[i][j]);
+                            game_arr[i][j] = "0";
+                        }
                     }
                 }
             }
         }
+
+        if (e.key == "ArrowLeft") {
+            for (let i = 0; i < game_size; i++) {
+                for (let j = 0; j < game_size; j++) {
+                    if (game_arr[i][j] != "0") {
+                        status_element.innerHTML += `<br>nonempty found at ${JSON.stringify([i, j])}`
+
+
+                        if (j > 0) {
+                            for (let k = j; k >= 0; k--) {
+                                if (game_arr[i][k - 1] == "0") {
+                                    swap([i, k], [i, k - 1]);
+                                }
+                                else {
+                                    break;
+                                }
+                            }
+                        }
+                        if (game_arr[i][j - 1] != "0" && game_arr[i][j - 1] == game_arr[i][j]) {
+                            game_arr[i][j - 1] = JSON.parse(game_arr[i][j - 1]) + JSON.parse(game_arr[i][j]);
+                            game_arr[i][j] = "0";
+                        }
+                    }
+                }
+            }
+        }
+        generateNew();
         renderGrid();
         // else if (e.key == "ArrowLeft") {
         //     for (let i = 0; i < game_size; i++) {
