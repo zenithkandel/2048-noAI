@@ -81,9 +81,10 @@ function generateNew() {
     }
     renderGrid()
 }
-
+let status_element = document.querySelector(".status");
 function keyHandle() {
     document.onkeydown = function (e) {
+        status_element.innerHTML = `Key Press Detected ${e.key}<br>`;
         if (e.key == "ArrowRight") {
             for (let i = 0; i < game_size; i++) {
                 for (let j = 0; j < game_size; j++) {
