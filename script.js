@@ -85,7 +85,7 @@ function generateNew() {
 }
 let status_element = document.querySelector(".status");
 function swap([a, b], [c, d]) {
-    status_element.innerHTML = `Swapping ${JSON.stringify([a, b])} with ${JSON.stringify([c, d])}`
+    // status_element.innerHTML = `Swapping ${JSON.stringify([a, b])} with ${JSON.stringify([c, d])}`
     temp = game_arr[c][d];
     game_arr[c][d] = game_arr[a][b];
     game_arr[a][b] = temp;
@@ -96,12 +96,12 @@ function keyHandle() {
     document.onkeydown = function (e) {
         // swap(game_arr[0][1], game_arr[0][3]);
 
-        status_element.innerHTML = `Key Press Detected ${e.key}<br>`;
+        // status_element.innerHTML = `Key Press Detected ${e.key}<br>`;
         if (e.key == "ArrowRight") {
             for (let i = 0; i < game_size; i++) {
                 for (let j = 0; j < game_size; j++) {
                     if (game_arr[i][j] != "0") {
-                        status_element.innerHTML += `<br>nonempty found at ${JSON.stringify([i, j])}`
+                        // status_element.innerHTML += `<br>nonempty found at ${JSON.stringify([i, j])}`
 
 
                         if (j - 1 < game_size) {
@@ -127,7 +127,7 @@ function keyHandle() {
             for (let i = 0; i < game_size; i++) {
                 for (let j = 0; j < game_size; j++) {
                     if (game_arr[i][j] != "0") {
-                        status_element.innerHTML += `<br>nonempty found at ${JSON.stringify([i, j])}`
+                        // status_element.innerHTML += `<br>nonempty found at ${JSON.stringify([i, j])}`
 
 
                         if (j > 0) {
@@ -143,6 +143,57 @@ function keyHandle() {
                         if (game_arr[i][j - 1] != "0" && game_arr[i][j - 1] == game_arr[i][j]) {
                             game_arr[i][j - 1] = JSON.parse(game_arr[i][j - 1]) + JSON.parse(game_arr[i][j]);
                             game_arr[i][j] = "0";
+                        }
+                    }
+                }
+            }
+        }
+
+        if (e.key == "ArrowUp") {
+            for (let i = 0; i < game_size; i++) {
+                for (let j = 0; j < game_size; j++) {
+                    if (game_arr[i][j] != "0") {
+                        // status_element.innerHTML += `<br>nonempty found at ${JSON.stringify([i, j])}`
+
+
+                        if (i > 0) {
+                            for (let k = i; k >= 0; k--) {
+                                if (game_arr[k - 1][j] == "0") {
+                                    swap([k, j], [k - 1, j]);
+                                }
+                                else {
+                                    break;
+                                }
+                            }
+                            if (game_arr[i - 1][j] != "0" && game_arr[i - 1][j] == game_arr[i][j]) {
+                                game_arr[i - 1][j] = JSON.parse(game_arr[i - 1][j]) + JSON.parse(game_arr[i][j]);
+                                game_arr[i][j] = "0";
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if (e.key == "ArrowDown") {
+            for (let i = 0; i < game_size; i++) {
+                for (let j = 0; j < game_size; j++) {
+                    if (game_arr[i][j] != "0") {
+                        // status_element.innerHTML += `<br>nonempty found at ${JSON.stringify([i, j])}`
+
+
+                        if (i - 1 < game_size) {
+                            for (let k = i; k < game_size; k++) {
+                                if (game_arr[k + 1][j] == "0") {
+                                    swap([k, j], [k + 1, j]);
+                                }
+                                else {
+                                    break;
+                                }
+                            }
+                            if (game_arr[i + 1][j] != "0" && game_arr[i + 1][j] == game_arr[i][j]) {
+                                game_arr[i + 1][j] = JSON.parse(game_arr[i + 1][j]) + JSON.parse(game_arr[i][j]);
+                                game_arr[i][j] = "0";
+                            }
                         }
                     }
                 }
