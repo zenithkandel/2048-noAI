@@ -36,7 +36,7 @@ function initializeGrid() {
         }
         game_arr.push(tmp);
     }
-    game_arr[3][3] = "2";
+    game_arr[0][1] = "2";
     game_arr[3][2] = "2";
     console.log(JSON.stringify(game_arr))
 }
@@ -84,8 +84,16 @@ function generateNew() {
     renderGrid()
 }
 let status_element = document.querySelector(".status");
+function swap([a, b], [c, d]) {
+    temp = game_arr[c, d];
+    game_arr[c, d] = game_arr[a, b];
+    game_arr[a, b] = temp;
+}
+
 function keyHandle() {
     document.onkeydown = function (e) {
+        // swap(game_arr[0][1], game_arr[0][3]);
+
         status_element.innerHTML = `Key Press Detected ${e.key}<br>`;
         if (e.key == "ArrowRight") {
             for (let i = 0; i < game_size; i++) {
@@ -95,10 +103,16 @@ function keyHandle() {
                         // if (game_arr[i][j + 1] && game_arr[i][j + 1] == game_arr[i][j]) {
                         //     game_arr[i][j + 1] = JSON.parse(game_arr[i][j + 1]) + JSON.parse(game_arr[i][j]);
                         //     game_arr[i][j] = "0";
-                        //     generateNew();
 
                         // }
-
+                        var l = j;
+                        for (let k = j; k < game_size; k++) {
+                            if (game_arr[i][k] == "0") {
+                                l = k;
+                                swap([i, l], [i, k]);
+                            }
+                        }
+                        // generateNew();
                     }
                 }
             }
