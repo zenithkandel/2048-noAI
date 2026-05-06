@@ -88,15 +88,17 @@ function keyHandle() {
         if (e.key == "ArrowRight") {
             for (let i = 0; i < game_size; i++) {
                 for (let j = 0; j < game_size; j++) {
-                    if (game_arr[i][j] !== "0") {
+                    if (game_arr[i][j] != "0") {
+                        // status_element.innerHTML += "<br>nonempty found"
                         if (game_arr[i][j + 1] && game_arr[i][j + 1] == game_arr[i][j]) {
-                            game_arr[i][j + 1] += game_arr[i][j];
+                            game_arr[i][j + 1] = JSON.parse(game_arr[i][j + 1]) + JSON.parse(game_arr[i][j]);
                             game_arr[i][j] = "0";
                         }
                     }
                 }
             }
         }
+        renderGrid()
         // else if (e.key == "ArrowLeft") {
         //     for (let i = 0; i < game_size; i++) {
         //         for (let j = 0; j < game_size; j++) {
